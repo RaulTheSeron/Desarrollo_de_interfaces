@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc version="1.0"> <!--  categoryclosedimage="FolderClosed" categoryopenimage="FolderOpened"  
+topicimage="ItemIco"-->
+        <tocitem text="Ayuda general"    target="VentanaPrincipal">
+           <tocitem text="Informe de entradas y salidas para un rango de productos"    target="VentanaInformes"/>
+        </tocitem>
+</toc>

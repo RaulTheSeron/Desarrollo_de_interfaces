@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informeVehiculos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dfe57465-12a8-49fe-8a8f-b0f1de932e21">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="desde" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="hasta" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select *
+from entradaproducto e
+join clientes c on c.Idcliente = e.idcliente
+join productos p on p.Idproducto = e.idproducto
+where e.tara != 0
+and e.idproducto between $P{desde} and $P{hasta}
+order by e.idproducto, e.numentrada;]]>
+	</queryString>
+	<field name="numentrada" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="matricula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idproducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idcliente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pesobruto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tara" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="neto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horaentrada" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horasalida" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nombrecliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Tipocliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Dirección" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nombreproducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Exiniciales" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="neto_1" class="java.lang.Integer" resetType="Group" resetGroup="por_porducto" calculation="Sum">
+		<variableExpression><![CDATA[$F{neto}]]></variableExpression>
+	</variable>
+	<group name="por_porducto">
+		<groupExpression><![CDATA[$F{idproducto}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement x="0" y="30" width="19" height="20" uuid="10e95370-da33-44da-a52b-7ade0a49155d"/>
+					<text><![CDATA[Nº]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="37" y="30" width="48" height="20" uuid="a38fd186-65a9-4085-acc5-93b7a1d0aa21"/>
+					<text><![CDATA[Matrícula]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="137" y="30" width="26" height="20" uuid="234ee439-acc7-4f59-9f3f-afe035da7494"/>
+					<text><![CDATA[Bruto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="225" y="30" width="35" height="20" uuid="b43325e4-f35f-432a-be22-304b8f9d2441"/>
+					<text><![CDATA[Tara]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="297" y="30" width="26" height="20" uuid="eff45988-56e3-4b1b-a2d6-78fd8dfe1c61"/>
+					<text><![CDATA[Neto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="375" y="30" width="43" height="20" uuid="053cfd32-8367-4431-b977-196f1a67d80f"/>
+					<text><![CDATA[Entrada]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="479" y="30" width="52" height="20" uuid="adbbe500-ef8b-4f68-b9b9-4fe1e4878acc"/>
+					<text><![CDATA[Salida]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="0" width="100" height="20" uuid="fa55e71f-43e0-4793-bd84-ac2990f19a94"/>
+					<textFieldExpression><![CDATA["PRODUCTO: "+$F{Nombreproducto}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50">
+				<textField>
+					<reportElement x="455" y="0" width="100" height="20" uuid="2ecdeccd-3014-4577-83c9-b4d9a3cd631c"/>
+					<textFieldExpression><![CDATA["TOTAL:"+$V{neto_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="131" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="105" uuid="9f6ec919-f898-4674-8ff5-b693955d8da8"/>
+				<imageExpression><![CDATA["\\logo\\logocoop.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="137" y="111" width="263" height="20" uuid="72f72212-3cfc-4cd7-9801-19bb93896fcd"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[INFORME DE ENTRADAS/SALIDAS POR PRODUCTO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="7" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="19" height="20" uuid="04d54dc7-9c0b-425c-9468-8cc527f7fbdc"/>
+				<textFieldExpression><![CDATA[$F{numentrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="1" width="100" height="20" uuid="5b34cbe9-5131-4f88-9f39-2f6cc20e5103"/>
+				<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="1" width="72" height="20" uuid="9d12076a-4d73-4c68-8209-1adb0845b263"/>
+				<textFieldExpression><![CDATA[$F{pesobruto}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="0d297fe5-a9b8-4cb8-933e-f33ae92de0d3"/>
+			</line>
+			<textField>
+				<reportElement x="225" y="1" width="51" height="20" uuid="cdb81391-3b28-4b7c-a0ad-153b142c7eaf"/>
+				<textFieldExpression><![CDATA[$F{tara}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="297" y="1" width="47" height="20" uuid="0260b3e1-ce0d-4d9e-9b33-afb14dbfbd97"/>
+				<textFieldExpression><![CDATA[$F{neto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="1" width="74" height="20" uuid="def04639-4b32-4ab1-8cf6-ce5d608176d7"/>
+				<textFieldExpression><![CDATA[$F{horaentrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="479" y="11" width="69" height="20" uuid="f9647310-701f-4ac3-9afb-800ccdc4cef7"/>
+				<textFieldExpression><![CDATA[$F{horasalida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="155" splitType="Stretch">
+			<bar3DChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="155" uuid="9b92629e-90d4-4a4c-b789-ce29d356f554"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{Nombreproducto}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Nombreproducto}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{neto_1}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>
